@@ -23,7 +23,7 @@ jobs:
 
       - run: hugo version
       - run: HUGO_ENV=production hugo -v
-      - run: cd $HUGO_BUILD_DIR && ls -al
+      - run: cd /root/hugo/public && ls -al
 
       - deploy:
           name: "Deploy via FTPS"
