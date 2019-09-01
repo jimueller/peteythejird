@@ -7,18 +7,21 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:10.15.0-jessie
+      - image: cibuilds/hugo:latest
 
-    working_directory: ~/repo
+    working_directory: ~/hugo
+    environment:
+      HUGO_BUILD_DIR: ~/hugo/public
 
     steps:
+      # install stuffs
+      - run: apk update && apk add git lftp
+
+      # checkout the repo
       - checkout
 
-      - run: sudo apt-get update
-      - run: sudo apt-get install hugo lftp
-      - run: npm install -g postcss-cli autoprefixer
-
-      - run: hugo
+      - run: hugo version
+      - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
 
   deploy:
     machine:
@@ -26,4 +29,4 @@ jobs:
     steps:
       - run:
         name: FTPS Deploy
-        command: lftp -e "set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-protect-data true;mirror -R ~/repo/public $FTP_DIR" -u $FTP_USER,$FTP_PASS $FTP_HOST
+        command: lftp -e "set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-protect-data true;mirror -R $HUGO_BUILD_DIR $FTP_DIR" -u $FTP_USER,$FTP_PASS $FTP_HOST
