@@ -15,8 +15,8 @@ jobs:
 
     steps:
       # install stuffs
-      - run: apk update && apk add git lftp
-      - run: lftp --version
+      - run: apk update && apk add git lftp nodejs
+      - run: npm install -g postcss-cli autoprefixer
 
       # checkout the repo
       - checkout
