@@ -5,6 +5,8 @@ defaultContentLanguage = "en"
 isMultilingual = false
 theme = "sam"
 googleAnalytics = " UA-5912265-1"
+favicon = "favicon.ico"
+
 
 [params]
     dateform             = "Mon Jan 02, 2006"
