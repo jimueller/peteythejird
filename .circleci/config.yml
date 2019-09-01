@@ -9,9 +9,9 @@ jobs:
       # specify the version you desire here
       - image: cibuilds/hugo:latest
 
-    working_directory: ~/project
+    working_directory: ~/hugo
     environment:
-      HUGO_BUILD_DIR: ~/project/public
+      HUGO_BUILD_DIR: ~/hugo/public
 
     steps:
       # install stuffs
@@ -22,7 +22,9 @@ jobs:
       - checkout
 
       - run: hugo version
-      - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
+      - run: HUGO_ENV=production hugo -v
+      - run: pwd
+      - run: ls -al
 
       - deploy:
           name: "Deploy via FTPS"
