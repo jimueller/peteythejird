@@ -9,13 +9,14 @@ jobs:
       # specify the version you desire here
       - image: cibuilds/hugo:latest
 
-    working_directory: ~/hugo
+    working_directory: ~/project
     environment:
-      HUGO_BUILD_DIR: ~/hugo/public
+      HUGO_BUILD_DIR: ~/project/public
 
     steps:
       # install stuffs
       - run: apk update && apk add git lftp
+      - run: lftp --version
 
       # checkout the repo
       - checkout
@@ -24,4 +25,5 @@ jobs:
       - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
 
       - deploy:
+          name: "Deploy via FTPS"
           command: lftp -e "set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-protect-data true;mirror -R $HUGO_BUILD_DIR $FTP_DIR" -u $FTP_USER,$FTP_PASS $FTP_HOST
