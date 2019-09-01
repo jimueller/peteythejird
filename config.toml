@@ -1,3 +1,18 @@
-baseURL = "http://example.org/"
+baseURL = "https://peteythejird.com"
 languageCode = "en-us"
-title = "My New Hugo Site"
+title = "Petey the Jird"
+defaultContentLanguage = "en"
+isMultilingual = false
+theme = "sam"
+googleAnalytics = " UA-5912265-1"
+
+[params]
+    dateform             = "Mon Jan 02, 2006"
+    dateformfull         = "Mon Jan 2 2006 15:04:05 EST"
+    favicon              = "sam.ico"
+    homepage             = "main"                           # What to call the home page link
+    footerText           = "Call me Sam, a theme for Hugo."
+
+[[params.mainMenu]]
+    link = "/gallery"
+    text = "Petey the Jird"
