@@ -1,0 +1,32 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.15.0-jessie
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - run: apt-get update && apt-get install hugo lftp
+      - run: npm install -g postcss-cli autoprefixer
+
+      - save_cache:
+          paths:
+            - node_modules
+
+      - run: hugo
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - run:
+        name: FTPS Deploy
+        command: lftp -e "set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-protect-data true;mirror -R ~/repo/public $FTP_DIR" -u $FTP_USER,$FTP_PASS $FTP_HOST
