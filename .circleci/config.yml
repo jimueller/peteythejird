@@ -24,4 +24,4 @@ jobs:
       - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
 
       - deploy:
-        command: lftp -e "set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-protect-data true;mirror -R $HUGO_BUILD_DIR $FTP_DIR" -u $FTP_USER,$FTP_PASS $FTP_HOST
+          command: lftp -e "set ftp:ssl-auth TLS;set ftp:ssl-force true;set ftp:ssl-protect-data true;mirror -R $HUGO_BUILD_DIR $FTP_DIR" -u $FTP_USER,$FTP_PASS $FTP_HOST
