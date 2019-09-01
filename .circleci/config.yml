@@ -17,10 +17,6 @@ jobs:
       - run: apt-get update && apt-get install hugo lftp
       - run: npm install -g postcss-cli autoprefixer
 
-      - save_cache:
-          paths:
-            - node_modules
-
       - run: hugo
 
   deploy:
