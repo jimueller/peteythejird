@@ -11,10 +11,17 @@ favicon = "favicon.ico"
 [params]
     dateform             = "Mon Jan 02, 2006"
     dateformfull         = "Mon Jan 2 2006 15:04:05 EST"
-    favicon              = "sam.ico"
+    favicon              = "favicon.ico"
     homepage             = "main"                           # What to call the home page link
-    footerText           = "Call me Sam, a theme for Hugo."
+    footerText           = "[Made with ❤️ for Petey](/about)"
+
+    description          = "Dedicated to the best jird ever, Petey"
+    images               = ["ptn.png"]
+    title                = "Petey the Jird"
 
 [[params.mainMenu]]
     link = "/gallery"
-    text = "Petey the Jird"
+    text = "Petey"
+[[params.mainMenu]]
+    link = "/video"
+    text = "the Jird"
